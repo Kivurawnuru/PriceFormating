@@ -69,4 +69,16 @@ public class PriceFormatorTest {
         Throwable exception = assertThrows(java.lang.Exception.class, () -> PriceFormator.formatForCountry(-200000.1234,"XX"));
         assertEquals("message e", exception.getMessage());
     }
+    @Test
+    void PriceFormatForCountryCZZero(){
+        assertEquals("0 Kč",PriceFormator.formatForCountry(0,"CZ"));
+    }
+    @Test
+    void PriceFormatForCountrySKZero(){
+        assertEquals("0 €",PriceFormator.formatForCountry(0,"SK"));
+    }
+    @Test
+    void PriceFormatForCountryUSZero(){
+        assertEquals("$0",PriceFormator.formatForCountry(0,"US"));
+    }
 }
