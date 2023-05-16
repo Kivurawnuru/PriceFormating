@@ -4,81 +4,81 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PriceFormatorTest {
 
     @Test
-    void PriceFormatForCountryCZ(){
+    void PriceFormatForCountryCZ()throws Exception{
         assertEquals("200 Kč",PriceFormator.formatForCountry(200,"CZ"));
     }
     @Test
-    void PriceFormatForCountrySK(){
+    void PriceFormatForCountrySK()throws Exception{
         assertEquals("200 €",PriceFormator.formatForCountry(200,"SK"));
     }
     @Test
-    void PriceFormatForCountryUS(){
+    void PriceFormatForCountryUS() throws Exception {
         assertEquals("$200",PriceFormator.formatForCountry(200,"US"));
     }
 
     @Test
-    void PriceFormatForCountryCZDec(){
+    void PriceFormatForCountryCZDec()throws Exception{
         assertEquals("200 Kč",PriceFormator.formatForCountry(200.1234,"CZ"));
     }
     @Test
-    void PriceFormatForCountrySKDec(){
+    void PriceFormatForCountrySKDec()throws Exception{
         assertEquals("200.12 €",PriceFormator.formatForCountry(200.1234,"SK"));
     }
     @Test
-    void PriceFormatForCountryUSDec(){
+    void PriceFormatForCountryUSDec()throws Exception{
         assertEquals("$200.12",PriceFormator.formatForCountry(200.1234,"US"));
     }
     @Test
-    void PriceFormatForCountryCZDecNeg(){
+    void PriceFormatForCountryCZDecNeg()throws Exception{
         assertEquals("-200 Kč",PriceFormator.formatForCountry(-200.1234,"CZ"));
     }
     @Test
-    void PriceFormatForCountrySKDecNeg(){
+    void PriceFormatForCountrySKDecNeg()throws Exception{
         assertEquals("-200.12 €",PriceFormator.formatForCountry(-200.1234,"SK"));
     }
     @Test
-    void PriceFormatForCountryUSDecNeg(){
+    void PriceFormatForCountryUSDecNeg()throws Exception{
         assertEquals("-$200.12",PriceFormator.formatForCountry(-200.1234,"US"));
     }
     @Test
-    void PriceFormatForCountryCZDecThousands(){
+    void PriceFormatForCountryCZDecThousands()throws Exception{
         assertEquals("200 000 Kč",PriceFormator.formatForCountry(200000.1234,"CZ"));
     }
     @Test
-    void PriceFormatForCountrySKDecThousands(){
+    void PriceFormatForCountrySKDecThousands()throws Exception{
         assertEquals("200 000.12 €",PriceFormator.formatForCountry(200000.1234,"SK"));
     }
     @Test
-    void PriceFormatForCountryUSDecThousands(){
+    void PriceFormatForCountryUSDecThousands()throws Exception{
         assertEquals("$200 000.12",PriceFormator.formatForCountry(200000.1234,"US"));
     }
     @Test
-    void PriceFormatForCountryCZDecThousandsNeg(){
+    void PriceFormatForCountryCZDecThousandsNeg()throws Exception{
         assertEquals("-200 000 Kč",PriceFormator.formatForCountry(-200000.1234,"CZ"));
     }
     @Test
-    void PriceFormatForCountrySKDecThousandsNeg(){
+    void PriceFormatForCountrySKDecThousandsNeg()throws Exception{
         assertEquals("-200 000.12 €",PriceFormator.formatForCountry(-200000.1234,"SK"));
     }
     @Test
-    void PriceFormatForCountryUSDecThousandsNeg(){
+    void PriceFormatForCountryUSDecThousandsNeg()throws Exception{
         assertEquals("-$200 000.12",PriceFormator.formatForCountry(-200000.1234,"US"));
     }
     @Test
-     void InvalidCountryShortCut(){
+     void InvalidCountryShortCut()throws Exception{
         Throwable exception = assertThrows(java.lang.Exception.class, () -> PriceFormator.formatForCountry(-200000.1234,"XX"));
         assertEquals("message e", exception.getMessage());
     }
     @Test
-    void PriceFormatForCountryCZZero(){
+    void PriceFormatForCountryCZZero()throws Exception{
         assertEquals("0 Kč",PriceFormator.formatForCountry(0,"CZ"));
     }
     @Test
-    void PriceFormatForCountrySKZero(){
+    void PriceFormatForCountrySKZero()throws Exception{
         assertEquals("0 €",PriceFormator.formatForCountry(0,"SK"));
     }
     @Test
-    void PriceFormatForCountryUSZero(){
+    void PriceFormatForCountryUSZero()throws Exception{
         assertEquals("$0",PriceFormator.formatForCountry(0,"US"));
     }
 }
