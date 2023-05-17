@@ -85,4 +85,9 @@ public class PriceFormatorTest {
     void PriceFormatForCountryUSZero()throws Exception{
         assertEquals("$0",PriceFormator.formatForCountry(0,"US"));
     }
+
+    @Test
+    void PriceFormatForCountryHU()throws Exception{
+        assertEquals("-1 200 212.021 Ft",PriceFormator.formatForCountry(-1200212.0214,"HU"));
+    }
 }
