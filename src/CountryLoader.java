@@ -6,10 +6,6 @@ public class CountryLoader {
 
     ArrayList<DefinitionOfCountry> countriesMoneyFormat = new ArrayList<>();
 
-    public ArrayList<DefinitionOfCountry> getCountriesMoneyFormat() {
-        return countriesMoneyFormat;
-    }
-
     public CountryLoader() throws Exception {
         countriesMoneyFormat = CountryLoader.load("countries.txt");
     }
@@ -28,10 +24,10 @@ public class CountryLoader {
         return result;
     }
 
-    public static DefinitionOfCountry getCountry(String shortcutOfCountryName, ArrayList<DefinitionOfCountry> countries) throws Exception {
-        for (int i = 0; i < countries.size(); i++) {
-            if ((countries.get(i).getName()).matches(shortcutOfCountryName)) {
-                return countries.get(i);
+    public DefinitionOfCountry getCountry(String shortcutOfCountryName) throws Exception {
+        for (int i = 0; i < countriesMoneyFormat.size(); i++) {
+            if ((countriesMoneyFormat.get(i).getName()).matches(shortcutOfCountryName)) {
+                return countriesMoneyFormat.get(i);
             }
         }
         throw new Exception("Country not found!") ;

@@ -13,10 +13,6 @@ public class DefinitionOfCountry {
         Decimals = decimals;
     }
 
-    public int getId() {
-        return Id;
-    }
-
     public String getName() {
         return name;
     }
@@ -32,31 +28,6 @@ public class DefinitionOfCountry {
     public int getDecimals() {
         return Decimals;
     }
-
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setMoneySymbol(String moneySymbol) {
-        this.moneySymbol = moneySymbol;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public void setDecimals(int decimals) {
-        Decimals = decimals;
-    }
-
-
-
-
-
 
     public static DefinitionOfCountry zCsv(String csv) throws Exception {
         try {
