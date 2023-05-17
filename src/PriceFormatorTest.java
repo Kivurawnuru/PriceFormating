@@ -70,8 +70,8 @@ public class PriceFormatorTest {
     }
     @Test
      void InvalidCountryShortCut()throws Exception{
-        Throwable exception = assertThrows(IndexOutOfBoundsException.class, () -> PriceFormator.formatForCountry(-200000.1234,"XX"));
-        //assertEquals("Index -1 out of bounds for length 3", exception.getMessage());
+        Throwable exception = assertThrows(java.lang.Exception.class, () -> PriceFormator.formatForCountry(-200000.1234,"XX"));
+        assertEquals("Country not found!", exception.getMessage());
     }
     @Test
     void PriceFormatForCountryCZZero()throws Exception{
