@@ -51,12 +51,12 @@ public class PriceFormator {
     }
     private static final DecimalFormat df = new DecimalFormat();
 
-    public static String formatForCountry(double price, String shortcutOfCountryName,DecimalFormat ) throws Exception {
+    public static String formatForCountry(double price, String shortcutOfCountryName,String decimalFormat) throws Exception {
         PriceFormator pf = new PriceFormator();
         DecimalFormat df = new DecimalFormat(decimalFormat);
 
         df.setRoundingMode(RoundingMode.UP);
-        System.out.println(df.format(number));
+        System.out.println(df.format(price));
 
         int wantedIndex = pf.getIndexOfCountry(shortcutOfCountryName);
         if (pf.getCountriesMoneyFormat().get(wantedIndex).getPosition() == 1) {
