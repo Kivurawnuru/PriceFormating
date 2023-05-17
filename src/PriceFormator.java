@@ -2,7 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PriceFormator {
 
@@ -23,7 +25,7 @@ public class PriceFormator {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     public static ArrayList<DefinitionOfCountry> load(String nameOfFile) throws Exception {
@@ -40,31 +42,59 @@ public class PriceFormator {
         return result;
     }
 
-    String decimalFormat = "0.";
-    public String correctDecimalFormat(String shortcutOfCountryName) throws Exception {
+    static String decimalFormat;
+    public static String correctDecimalFormat(String shortcutOfCountryName) throws Exception {
+        decimalFormat = "#";
         PriceFormator pf = new PriceFormator();
-        int wantedIndex = pf.getIndexOfCountry(shortcutOfCountryName);
-        for(int i = 0; i < countriesMoneyFormat.get(wantedIndex).getDecimals(); i++){
-            decimalFormat = decimalFormat + "0";
+
+        if (pf.getCountriesMoneyFormat().get(pf.getIndexOfCountry(shortcutOfCountryName)).getDecimals() >= 1) {
+            int wantedIndex = pf.getIndexOfCountry(shortcutOfCountryName);
+            for (int i = 0; i < pf.countriesMoneyFormat.get(wantedIndex).getDecimals(); i++) {
+                if(i == 0){
+                    decimalFormat = decimalFormat + ".";
+                }
+                decimalFormat = decimalFormat + "#";
+            }
+            return decimalFormat;
+        } else {
+            return decimalFormat;
         }
-        return decimalFormat;
+
     }
-    private static final DecimalFormat df = new DecimalFormat();
 
-    public static String formatForCountry(double price, String shortcutOfCountryName,String decimalFormat) throws Exception {
+    public static String formatForCountry(double price, String shortcutOfCountryName) throws Exception {
         PriceFormator pf = new PriceFormator();
-        DecimalFormat df = new DecimalFormat(decimalFormat);
 
-        df.setRoundingMode(RoundingMode.UP);
-        System.out.println(df.format(price));
+        decimalFormat = correctDecimalFormat(shortcutOfCountryName);
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+        DecimalFormat df = new DecimalFormat(decimalFormat,symbols);
+        symbols.setGroupingSeparator(' ');
+        df.setDecimalFormatSymbols(symbols);
+        df.setGroupingSize(3);
+        df.setGroupingUsed(true);
 
         int wantedIndex = pf.getIndexOfCountry(shortcutOfCountryName);
-        if (pf.getCountriesMoneyFormat().get(wantedIndex).getPosition() == 1) {
-            String finalString = pf.getCountriesMoneyFormat().get(wantedIndex).getMoneySymbol() + price;
+
+        if(price < 0){
+            if (pf.getCountriesMoneyFormat().get(wantedIndex).getPosition() >= 1) {
+                price = price * -1;
+                String finalString = "-"+pf.getCountriesMoneyFormat().get(wantedIndex).getMoneySymbol() + df.format(price);
+                return finalString;
+            }
+            if (pf.getCountriesMoneyFormat().get(wantedIndex).getPosition() == 0) {
+                df.setRoundingMode(RoundingMode.DOWN);
+                String finalString = df.format(price) +" "+ pf.getCountriesMoneyFormat().get(wantedIndex).getMoneySymbol();
+                return finalString;
+            }
+        }
+
+        if (pf.getCountriesMoneyFormat().get(wantedIndex).getPosition() >= 1) {
+            String finalString = pf.getCountriesMoneyFormat().get(wantedIndex).getMoneySymbol() + df.format(price);
             return finalString;
         }
-        if(pf.getCountriesMoneyFormat().get(wantedIndex).getPosition() == 0){
-            String finalString = price + pf.getCountriesMoneyFormat().get(wantedIndex).getMoneySymbol();
+        if (pf.getCountriesMoneyFormat().get(wantedIndex).getPosition() == 0) {
+            df.setRoundingMode(RoundingMode.DOWN);
+            String finalString = df.format(price) +" "+ pf.getCountriesMoneyFormat().get(wantedIndex).getMoneySymbol();
             return finalString;
         }
 

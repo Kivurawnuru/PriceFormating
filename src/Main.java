@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class Main {
 
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+    private static final DecimalFormat df = new DecimalFormat("###,###.##");
 
     public static void main(String[] args) throws Exception {
 
         PriceFormator countriesMoneyFormat = new PriceFormator();
 
-        double number = 123.1458;
+        double number = 52123.1458;
 
 
 
@@ -22,7 +22,6 @@ public class Main {
 
 
 
-        System.out.println(Math.round(number));
 
 
 //        for(int i  = 0; i < countriesMoneyFormat.getCountriesMoneyFormat().get(); i++){

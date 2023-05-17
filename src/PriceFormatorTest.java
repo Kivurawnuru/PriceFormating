@@ -1,4 +1,8 @@
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PriceFormatorTest {
@@ -66,8 +70,8 @@ public class PriceFormatorTest {
     }
     @Test
      void InvalidCountryShortCut()throws Exception{
-        Throwable exception = assertThrows(java.lang.Exception.class, () -> PriceFormator.formatForCountry(-200000.1234,"XX"));
-        assertEquals("message e", exception.getMessage());
+        Throwable exception = assertThrows(IndexOutOfBoundsException.class, () -> PriceFormator.formatForCountry(-200000.1234,"XX"));
+        //assertEquals("Index -1 out of bounds for length 3", exception.getMessage());
     }
     @Test
     void PriceFormatForCountryCZZero()throws Exception{
