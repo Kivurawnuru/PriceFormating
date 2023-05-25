@@ -96,7 +96,7 @@ public class PriceFormatorTest {
     }
     @Test
     void PriceFormatorForVATOfSK()throws Exception{
-        assertEquals("400 €", PriceFormator.formatForCountryOfVAT(2000,"SK"));
+        assertEquals("400 €", PriceFormator.formatForCountryOfVAT2(2000,"SK"));
     }
     @Test
     void PriceFormatorForVATUS()throws Exception{

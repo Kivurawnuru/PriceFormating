@@ -35,7 +35,7 @@ public class DefinitionOfCountry {
         return dphInProcents;
     }
 
-    public static DefinitionOfCountry zCsv(String csv) throws Exception {
+    public static DefinitionOfCountry fromCsv(String csv) throws Exception {
         try {
             csv = csv.trim();
             String[] radek = csv.split(";");

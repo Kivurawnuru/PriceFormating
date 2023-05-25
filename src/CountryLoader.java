@@ -15,7 +15,7 @@ public class CountryLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(nameOfFile))) {
             String line = null;
             while ((line = br.readLine()) != null) {
-                DefinitionOfCountry dofc = DefinitionOfCountry.zCsv(line);
+                DefinitionOfCountry dofc = DefinitionOfCountry.fromCsv(line);
                 result.add(dofc);
             }
         } catch (Exception e) {

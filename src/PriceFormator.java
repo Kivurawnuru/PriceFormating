@@ -30,6 +30,20 @@ public class PriceFormator {
         }
     }
 
+    public static String formatForCountryOfVAT2(double price, String shortcutOfCountryName) throws Exception {
+        CountryLoader countryLoader = new CountryLoader();
+
+        DefinitionOfCountry wantedCountry = countryLoader.getCountry(shortcutOfCountryName);
+
+        int VAT = wantedCountry.getDphInProcents();
+
+        double nPrice = price / 100;
+        price = nPrice * VAT;
+
+        String formatedPrice = formatForCountry(price, shortcutOfCountryName);
+        return formatedPrice;
+    }
+
     public static String formatForCountryOfVAT(double price, String shortcutOfCountryName) throws Exception {
         CountryLoader countryLoader = new CountryLoader();
 
