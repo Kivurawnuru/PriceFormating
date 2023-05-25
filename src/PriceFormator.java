@@ -23,12 +23,42 @@ public class PriceFormator {
             finalString = df.format(price) + " " + wantedCountry.getMoneySymbol();
         }
 
-        if(isNegative){
+        if (isNegative) {
             return "-" + finalString;
-        }
-        else {
+        } else {
             return finalString;
         }
+    }
+
+    public static String formatForCountryOfVAT(double price, String shortcutOfCountryName) throws Exception {
+        CountryLoader countryLoader = new CountryLoader();
+
+        DefinitionOfCountry wantedCountry = countryLoader.getCountry(shortcutOfCountryName);
+
+        DecimalFormat df = getDecimalFormat(wantedCountry);
+        int VAT = wantedCountry.getDphInProcents();
+
+        boolean isZero = VAT == 0;
+
+        String finalStringOfVAT = "";
+
+
+        if (wantedCountry.getPosition() >= 1) {
+            double nPrice = price / 100;
+            price = nPrice * VAT;
+            finalStringOfVAT = wantedCountry.getMoneySymbol() + df.format(price);
+            return finalStringOfVAT;
+        }
+        if (wantedCountry.getPosition() == 0) {
+            double nPrice = price / 100;
+            price = nPrice * VAT;
+            finalStringOfVAT = df.format(price) + " " + wantedCountry.getMoneySymbol();
+            return finalStringOfVAT;
+        }
+        if (isZero) {
+            return "0";
+        }
+        return finalStringOfVAT;
     }
 
     private static DecimalFormat getDecimalFormat(DefinitionOfCountry wantedCountry) throws Exception {

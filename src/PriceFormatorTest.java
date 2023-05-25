@@ -90,4 +90,20 @@ public class PriceFormatorTest {
     void PriceFormatForCountryHU()throws Exception{
         assertEquals("-1 200 212.021 Ft",PriceFormator.formatForCountry(-1200212.0214,"HU"));
     }
+    @Test
+    void PriceFormatorForVATOfCZ()throws Exception{
+        assertEquals("420 Kč", PriceFormator.formatForCountryOfVAT(2000,"CZ"));
+    }
+    @Test
+    void PriceFormatorForVATOfSK()throws Exception{
+        assertEquals("400 €", PriceFormator.formatForCountryOfVAT(2000,"SK"));
+    }
+    @Test
+    void PriceFormatorForVATUS()throws Exception{
+        assertEquals("$120", PriceFormator.formatForCountryOfVAT(2000,"US"));
+    }
+    @Test
+    void PriceFormatorForVATHU()throws Exception{
+        assertEquals("540 Ft", PriceFormator.formatForCountryOfVAT(2000,"HU"));
+    }
 }
