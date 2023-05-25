@@ -1,4 +1,4 @@
-# Price Formating Grogram
+# Price Formating Program
 
 ## Description
 
